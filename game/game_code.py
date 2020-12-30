@@ -33,6 +33,7 @@ power_enabled=False
 Colour=(255, 0, 102)
 def draw():
     global score,level,level_display,spacemusic1,final_score,level_reached,asteroids,power_enabled
+# Background for home screen
     if game_over and not level_failed:
         screen.clear()
         screen.blit("bg1",(0,0))
@@ -42,6 +43,7 @@ def draw():
         if tom:
             tick1.draw()
         power_enabled=False
+# Background for displaying total score and level reached
     if game_over and level_failed:
         score=0
         level='0'
@@ -53,6 +55,7 @@ def draw():
         asteroids=[]
         power_enabled=False
         triple_bullet.image="power_bullet"
+# Gaming Background with instaneous score and level display 
     if not game_over:
         screen.clear()
         screen.blit("background3",(0,0)) 
@@ -107,13 +110,16 @@ def update():
             player.x = 90
             player.y = HEIGHT//2
             player.frame=2
+# To open the text file high_score.txt
     f=open("c:/Users/AJAY SHARON/.spyder-py3/programmingclub/jerry/high_score.txt",'r')
     high_score=int(f.read())
     f.close()
+    # To make changes in the file
     if high_score < score:
             f=open("c:/Users/AJAY SHARON/.spyder-py3/programmingclub/jerry/high_score.txt",'w')
             f.write(str(score))
             f.close()
+# Making use of keyboard
 def on_key_down(key):
     global game_over,level_failed,player,tom
     if game_over and not level_failed:
@@ -130,14 +136,17 @@ def on_key_down(key):
     if not game_over:
         if key == keys.SPACE:
             create_bullet()
+# Movement speed of falling triple bullet
 def move_power_bullet():
-     triple_bullet.y += 5           
+     triple_bullet.y += 5  
+# To check the collision of player and the triple bullet         
 def power_bullet_collision():
     global power_enabled
     if player.colliderect(triple_bullet):
         triple_bullet.image="blank"
         triple_bullet.y += 5  
         power_enabled=True
+# Moving asteroid in the horizontal direction
 def move_asteroid():
     for asteroid in asteroids:
         asteroid.x -= 5
@@ -145,6 +154,7 @@ def move_asteroid():
             asteroids.remove(asteroid)
             if len(lives) != 0:
                 lives.pop()
+# This function is used move player up,down,right,left
 def move_player():
     if keyboard.left:
         player.x -= 10
@@ -154,6 +164,7 @@ def move_player():
         player.y -= 10
     if keyboard.down:
         player.y += 10
+
 def animate_player(player):
     if tom:
         if True:
