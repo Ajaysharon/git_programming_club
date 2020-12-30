@@ -23,7 +23,7 @@ bullets=[]
 bullets1=[]
 asteroids=[]
 lives=[]
-game_over = False
+game_over = True
 level_failed=False
 level_display=False
 tom=False
@@ -165,7 +165,7 @@ def animate_player(player):
         if True:
             player.image ="ufo{}".format(player.frame)
         player.frame+=1
-        if player.frame >=9:
+        if player.frame >9:
             player.frame=2
 def player_boundary():
     if player.left<0:
