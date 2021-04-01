@@ -164,9 +164,10 @@ def move_player():
         player.y -= 10
     if keyboard.down:
         player.y += 10
-
+# This function makes the player to animate
 def animate_player(player):
     if tom:
+        player.frame=16
         if True:
             player.image="ufo{}".format(player.frame)
         player.frame+=1
@@ -176,8 +177,9 @@ def animate_player(player):
         if True:
             player.image ="ufo{}".format(player.frame)
         player.frame+=1
-        if player.frame >9:
+        if player.frame > 9:
             player.frame=2
+# To fix the boundary for the player
 def player_boundary():
     if player.left<0:
         player.left=0
@@ -187,6 +189,7 @@ def player_boundary():
         player.top=0
     if player.bottom>HEIGHT:
         player.bottom=HEIGHT
+#To create bullet and trible bullet when power enabled
 def create_bullet():
     sounds.bulletsound.play()
     bullet=Actor("bullet")
@@ -202,12 +205,14 @@ def create_bullet():
         bullet.x = player.right+25
         bullet.y = player.y-25
         bullets.append(bullet)
+# To create asteroids
 def create_asteroids():
     asteroid=Actor("asteroid1")
     asteroid.right=WIDTH
     asteroid.y =random.randint(100,HEIGHT-100)
     asteroids.append(asteroid)
     asteroid.frame=1
+# This function is for rotating asteroids
 def animate_asteroid(asteroid):
     if True:
         asteroid.image ="asteroid{}".format(asteroid.frame)
@@ -226,6 +231,7 @@ def move_bullet():
             bullets.remove(bullet)
         else:
             bullet.x += 10
+# To check collision of player and reduse life
 def player_asteroid_collision():
     for asteroid in asteroids:
         animate_asteroid(asteroid)
@@ -233,6 +239,7 @@ def player_asteroid_collision():
             asteroids.remove(asteroid)
             if len(lives) != 0:
                 lives.pop()
+#This function is for checking bullet collision and adding score by 1 and removing bullet and asteroids
 def bullet_collision():
     global score
     for bullet in bullets:
@@ -243,6 +250,7 @@ def bullet_collision():
                 asteroids.remove(asteroid)
     if len(asteroids)==0:
         create_asteroids()
+        
 create_life()
 create_asteroids()
 pgzrun.go()
